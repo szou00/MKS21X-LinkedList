@@ -24,7 +24,24 @@ public class MyLinkedList {
  }
 
  public String toString() {
-   return "";
+   String ans = "";
+   Node current = start;
+   for (int i = 0; i < size + 1; i++) {
+     if (current != end) {
+       ans += current.getData() + ", ";
+       current = current.getNext();
+     }
+     else {
+       ans += current.getData() + " ]";
+     }
+   }
+   return ans;
  }
 
+ public static void main(String[] args) {
+   Node test1 = new Node(5);
+   Node test2 = new Node(-3);
+   MyLinkedList list = new MyLinkedList(test1, test2);
+   System.out.print(list);
+ }
 }
