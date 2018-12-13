@@ -5,7 +5,7 @@ public class MyLinkedList {
   public MyLinkedList(Node newStart, Node newEnd){
    start = newStart;
    end = newEnd;
-   start.setNext(end);
+   start.setNext(end); //stores the next value in each node
    end.setPrev(start);
    size = 2; //those two nodes
  }
@@ -41,10 +41,10 @@ public class MyLinkedList {
  public static void main(String[] args) {
    Node test1 = new Node(5);
    Node test2 = new Node(-3);
-   MyLinkedList list = new MyLinkedList(test1, test2);
+   MyLinkedList list = new MyLinkedList(test1, test2); //creates list with just two nodes
    System.out.print(list);
    for (int x = 0; x < 10; x++) {
-     list.add((int)(Math.random() * 100));
+     list.add((int)(Math.random() * 100)); //adds in random numbers
      System.out.print(list);
    }
  }
