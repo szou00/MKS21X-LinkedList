@@ -24,15 +24,15 @@ public class MyLinkedList {
  }
 
  public String toString() {
-   String ans = "";
+   String ans = "[";
    Node current = start;
-   for (int i = 0; i < size + 1; i++) {
+   for (int i = 0; i < size; i++) {
      if (current != end) {
        ans += current.getData() + ", ";
        current = current.getNext();
      }
      else {
-       ans += current.getData() + " ]";
+       ans += current.getData() + "]" + "\n";
      }
    }
    return ans;
@@ -43,5 +43,9 @@ public class MyLinkedList {
    Node test2 = new Node(-3);
    MyLinkedList list = new MyLinkedList(test1, test2);
    System.out.print(list);
+   for (int x = 0; x < 10; x++) {
+     list.add((int)(Math.random() * 100));
+     System.out.print(list);
+   }
  }
 }
