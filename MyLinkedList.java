@@ -54,11 +54,25 @@ public class MyLinkedList {
 
    public boolean add(Integer value) {
      Node newVal = new Node(value);
-     end.setNext(newVal);
-     end = newVal; //the new Node becomes the last node
-     newVal.setPrev(end); //it gets the end as the previous and vice versa
-     size += 1; //size increases by one
-     return true;
+     if (size() == 0) {
+       start = newVal;
+       return true;
+     }
+     else {
+       if (size() == 1) {
+         end = newVal;
+         start.setNext(newVal);
+         end.setPrev(start);
+         return true;
+       }
+       else {
+         end.setNext(newVal);
+         newVal.setPrev(end); //it gets the end as the previous and vice versa
+         end = newVal; //the new Node becomes the last node
+         size += 1; //size increases by one
+         return true;
+       }
+     }
    }
 
    public Integer get(int index) {
@@ -71,8 +85,9 @@ public class MyLinkedList {
          current = start.getNext();
        }
      }
+     return 0;
    }
-   
+
    public String toString() {
      String ans = "[";
      Node current = start;
