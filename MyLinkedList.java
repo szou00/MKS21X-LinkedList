@@ -56,22 +56,22 @@ public class MyLinkedList {
      Node newVal = new Node(value);
      if (size() == 0) {
        start = newVal;
+       size += 1;
        return true;
      }
-     else {
-       if (size() == 1) {
+     if (size() == 1) {
          end = newVal;
          start.setNext(newVal);
          end.setPrev(start);
+         size += 1;
          return true;
-       }
-       else {
+      }
+     else {
          end.setNext(newVal);
          newVal.setPrev(end); //it gets the end as the previous and vice versa
          end = newVal; //the new Node becomes the last node
          size += 1; //size increases by one
          return true;
-       }
      }
    }
 
@@ -97,10 +97,15 @@ public class MyLinkedList {
          current = current.getNext();
        }
        else {
-         ans += current.getData() + "]" + "\n";
+         if (current == start) {
+           ans += current.getData();
+         } //SHARON THIS!! MAKE START EQUAL TO LAST
+         if (current == end) {
+           ans += current.getData();
+         }
        }
      }
-     return ans;
+     return ans  + "]" + "\n";
    }
 
   public static void main(String[] args) {
