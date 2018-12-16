@@ -129,7 +129,13 @@ public class MyLinkedList {
    }
 
    public void add(int index,Integer value) {
-     
+     Node newNode = new Node(value); //creates a new node with the value
+     size += 1;
+     newNode.setPrev(getNthNode(index-1)); //sets the prev and next for the new node
+     newNode.setNext(getNthNode(index));
+     getNthNode(index - 1).setNext(newNode); //finds the node before this index in the list
+     getNthNode(index).setPrev(newNode);
+
    }
 
    public Integer remove(int index) {
