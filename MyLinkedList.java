@@ -118,11 +118,18 @@ public class MyLinkedList {
    }
 
    public int indexOf(Integer value) {
-     return 0;
+     Node current = start;
+     for (int i = 0; i < size; i++) {
+       if (current.getData() == value) {
+         return i;
+       }
+       current = current.getNext();
+     }
+     return -1;
    }
 
    public void add(int index,Integer value) {
-
+     
    }
 
    public Integer remove(int index) {
