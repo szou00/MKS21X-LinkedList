@@ -112,6 +112,7 @@ public class MyLinkedList {
        if (current.getData() == value) {
          return true;
        }
+       current = current.getNext();
      }
      return false;
    }
