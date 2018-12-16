@@ -129,20 +129,39 @@ public class MyLinkedList {
    }
 
    public void add(int index,Integer value) {
+     if(index < 0 || index > size()){
+      throw new IndexOutOfBoundsException();
+    }
      Node newNode = new Node(value); //creates a new node with the value
      size += 1;
-     newNode.setPrev(getNthNode(index-1)); //sets the prev and next for the new node
-     newNode.setNext(getNthNode(index));
-     getNthNode(index - 1).setNext(newNode); //finds the node before this index in the list
-     getNthNode(index).setPrev(newNode);
-
+     if (index == 0) {
+       newNode.setNext(start);
+       start.setPrev(newNode);
+       start = newNode;
+     }
+     else {
+       Node prevNode = getNthNode(index-1);
+       Node nextNode = getNthNode(index);
+       prevNode.setNext(newNode); //finds the node before this index in the list
+       newNode.setPrev(prevNode); //sets the prev and next for the new node
+       newNode.setNext(nextNode);
+       nextNode.setPrev(newNode);
+     }
    }
 
    public Integer remove(int index) {
-     return 0;
+     Node removed = getNthNode(index);
+     getNthNode(index-1).setNext(getNthNode(index+1));
+     getNthNode(index+1).setPrev(getNthNode(index-1));
+     size -= 1;
+     return removed.getData();
    }
 
    public boolean remove(Integer value) { //a private method to find a node you want could be useful here
+     if (contains(value)) {
+       remove(indexOf(value));
+       return true;
+     }
      return false;
    }
 
