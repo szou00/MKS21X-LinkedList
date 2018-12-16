@@ -1,3 +1,6 @@
+import java.util.List;
+import java.util.NoSuchElementException;
+
 public class MyLinkedList {
   private int size;
   private Node start,end;
@@ -75,7 +78,6 @@ public class MyLinkedList {
          size += 1; //size increases by one
          return true;
      }
-     return false;
    }
 
    //getting the node at a specific index
@@ -194,6 +196,9 @@ public class MyLinkedList {
    //removes the first occurence of a value in the list
    //returns true if removed successfully, false if not
    public boolean remove(Integer value) {
+     if (!contains(value)) { //throws an exception if the value can't be found
+       throw new NoSuchElementException();
+     }
      if (contains(value)) { //checks to see if the list contains the value before proceeding
        remove(indexOf(value)); //finds the first index of the value within the list and uses the previous remove function to remove the node of the value
        return true;
