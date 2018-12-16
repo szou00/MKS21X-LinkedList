@@ -23,7 +23,7 @@ public class Driver {
     System.out.println("1 should be at index 0: " + list);
     list.add(0,Integer.valueOf(0));
     System.out.println("0 should be at index 0: " + list);
-    System.out.println("Removing index 4, should print 17: " + list.remove(4));
+    System.out.println("Removing index 4, should print -9: " + list.remove(4));
     System.out.println(list);
     System.out.println("Finding indexOf of 0: " + list.indexOf(0));
     System.out.println("Removing value 0, should print true: " + list.remove(Integer.valueOf(0)));
