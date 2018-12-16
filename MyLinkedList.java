@@ -75,33 +75,78 @@ public class MyLinkedList {
      }
    }
 
-   public Integer get(int index) {
+   private Node getNthNode(int index) {
      Node current = start;
+     for (int i = 0; i < size(); i++) {
+       if (i < index) {
+         current = current.getNext();
+       }
+     }
+     return current;
+   }
+
+   public Integer get(int index) {
+     /**Node current = start;
      for (int i = 0; i < size(); i++) {
        if (i == index) {
          return current.getData();
        }
        else {
-         current = start.getNext();
+         current = current.getNext();
        }
      }
+     return 0; **/
+     return getNthNode(index).getData();
+   }
+
+   public Integer set(int index,Integer value) {
+     Node current = getNthNode(index);
+     Integer currentData = current.getData();
+     current.setData(value);
+     return currentData;
+   }
+
+   public boolean contains(Integer value) {
+     Node current = start;
+     for (int i = 0; i < size; i++) {
+       if (current.getData() == value) {
+         return true;
+       }
+     }
+     return false;
+   }
+
+   public int indexOf(Integer value) {
      return 0;
+   }
+
+   public void add(int index,Integer value) {
+
+   }
+
+   public Integer remove(int index) {
+     return 0;
+   }
+
+   public boolean remove(Integer value) { //a private method to find a node you want could be useful here
+     return false;
    }
 
    public String toString() {
      String ans = "[";
      Node current = start;
      for (int i = 0; i < size; i++) {
-       if (current != end) {
-         ans += current.getData() + ", ";
-         current = current.getNext();
+       if (i == 0) {
+         ans += start.getData();
+         current = start.getNext();
        }
        else {
-         if (current == start) {
-           ans += current.getData();
+         if (i < size - 1) {
+           ans += ", " + current.getData();
+           current = current.getNext();
          } //SHARON THIS!! MAKE START EQUAL TO LAST
-         if (current == end) {
-           ans += current.getData();
+         if (i == size - 1) {
+           ans += ", " + current.getData();
          }
        }
      }
