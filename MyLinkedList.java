@@ -86,20 +86,16 @@ public class MyLinkedList {
    }
 
    public Integer get(int index) {
-     /**Node current = start;
-     for (int i = 0; i < size(); i++) {
-       if (i == index) {
-         return current.getData();
-       }
-       else {
-         current = current.getNext();
-       }
+     if (index < 0 || index > size()) {
+       throw new IndexOutOfBoundsException();
      }
-     return 0; **/
      return getNthNode(index).getData();
    }
 
    public Integer set(int index,Integer value) {
+     if (index < 0 || index > size()) {
+       throw new IndexOutOfBoundsException();
+     }
      Node current = getNthNode(index);
      Integer currentData = current.getData();
      current.setData(value);
@@ -140,25 +136,52 @@ public class MyLinkedList {
        start = newNode;
      }
      else {
-       Node prevNode = getNthNode(index-1);
-       Node nextNode = getNthNode(index);
-       prevNode.setNext(newNode); //finds the node before this index in the list
-       newNode.setPrev(prevNode); //sets the prev and next for the new node
-       newNode.setNext(nextNode);
-       nextNode.setPrev(newNode);
+       if (index == size()) {
+         end.setNext(newNode);
+         newNode.setPrev(end);
+         end = newNode;
+       }
+       else {
+         Node prevNode = getNthNode(index-1);
+         Node nextNode = getNthNode(index);
+         prevNode.setNext(newNode); //finds the node before this index in the list
+         newNode.setPrev(prevNode); //sets the prev and next for the new node
+         newNode.setNext(nextNode);
+         nextNode.setPrev(newNode);
+       }
      }
    }
 
    public Integer remove(int index) {
-     Node removed = getNthNode(index);
-     getNthNode(index-1).setNext(getNthNode(index+1));
-     getNthNode(index+1).setPrev(getNthNode(index-1));
-     size -= 1;
-     return removed.getData();
+     if(index < 0 || index > size()){
+      throw new IndexOutOfBoundsException();
+    }
+    else {
+      Node removed = getNthNode(index);
+      if (index == 0) {
+        start = getNthNode(index+1);
+        start.setPrev(null);
+        size -= 1;
+      }
+      else {
+        if (index < size() - 1) {
+          getNthNode(index-1).setNext(getNthNode(index+1));
+          getNthNode(index+1).setPrev(getNthNode(index-1));
+          size -= 1;
+        }
+        else {
+          end = getNthNode(index-1);
+          end.setNext(null);
+          size -= 1;
+        }
+      }
+      return removed.getData();
+    }
    }
 
    public boolean remove(Integer value) { //a private method to find a node you want could be useful here
      if (contains(value)) {
+       System.out.println("yes");
        remove(indexOf(value));
        return true;
      }
@@ -177,7 +200,7 @@ public class MyLinkedList {
          if (i < size - 1) {
            ans += ", " + current.getData();
            current = current.getNext();
-         } //SHARON THIS!! MAKE START EQUAL TO LAST
+         }
          if (i == size - 1) {
            ans += ", " + current.getData();
          }
