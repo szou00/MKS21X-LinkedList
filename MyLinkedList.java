@@ -136,7 +136,7 @@ public class MyLinkedList {
        start = newNode;
      }
      else {
-       if (index == size()) {
+       if (index == size() - 1) {
          end.setNext(newNode);
          newNode.setPrev(end);
          end = newNode;
