@@ -114,7 +114,7 @@ public class MyLinkedList {
    public boolean contains(Integer value) {
      Node current = start;
      for (int i = 0; i < size; i++) { //loops through to see if a node's value is equal to the desired value
-       if (current.getData() == value) {
+       if (current.getData().equals(value)) {
          return true;
        }
        current = current.getNext(); //if the node's value isn't equal, the next node becomes current
@@ -127,7 +127,7 @@ public class MyLinkedList {
    public int indexOf(Integer value) {
      Node current = start;
      for (int i = 0; i < size; i++) { //loops through the list to see if a node's value is equal to the desired value
-       if (current.getData() == value) {
+       if (current.getData().equals(value)) {
          return i; //if it is, returns the index of that node
        }
        current = current.getNext(); //if it isn't, the next node becomes current
@@ -173,18 +173,18 @@ public class MyLinkedList {
     else {
       Node removed = getNthNode(index); //finds the node that is going to be removed
       if (index == 0) { //special case: removing from the beg of the list
-        start = getNthNode(index+1); //start gets the node after the node that is about to be removed
+        start = removed.getNext(); //start gets the node after the node that is about to be removed
         start.setPrev(null); //the new start sets its prev to null
         size -= 1; //size decreases by one
       }
       else {
         if (index < size() - 1) {
-          getNthNode(index-1).setNext(getNthNode(index+1)); //the next of the node before the removed node gets the node after the removed node
-          getNthNode(index+1).setPrev(getNthNode(index-1)); //the prev of the node after the removed node gets the node before the removed node
+          removed.getPrev().setNext(removed.getNext()); //the next of the node before the removed node gets the node after the removed node
+          removed.getNext().setPrev(removed.getPrev()); //the prev of the node after the removed node gets the node before the removed node
           size -= 1; //size deceases by one
         }
         else { //special case: removing from the end of the list
-          end = getNthNode(index-1); //the node before the removed node becomes the new end
+          end = removed.getPrev(); //the node before the removed node becomes the new end
           end.setNext(null); //the next of the new end is set to null
           size -= 1; //size decreases by one
         }
@@ -197,13 +197,12 @@ public class MyLinkedList {
    //returns true if removed successfully, false if not
    public boolean remove(Integer value) {
      if (!contains(value)) { //throws an exception if the value can't be found
-       throw new NoSuchElementException();
+       return false;
      }
-     if (contains(value)) { //checks to see if the list contains the value before proceeding
+     else { //checks to see if the list contains the value before proceeding
        remove(indexOf(value)); //finds the first index of the value within the list and uses the previous remove function to remove the node of the value
        return true;
      }
-     return false;
    }
 
    //prints out the list
