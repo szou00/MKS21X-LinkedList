@@ -240,7 +240,7 @@ public class MyLinkedList {
          }
        }
      }
-     return ans  + "]" + "\n"; //closes string with brackets
+     return ans  + "]"; //closes string with brackets
    }
 
   public static void main(String[] args) {
